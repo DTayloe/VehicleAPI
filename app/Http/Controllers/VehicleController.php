@@ -65,7 +65,12 @@ class VehicleController extends Controller
      */
     public function show($id)
     {
-        return Vehicle::findOrFail($id)->toJson();
+        $vehicleQuery = Vehicle::where('id', $id);
+        if($vehicleQuery->doesntExist()){
+            return response()->json(["error" => "vehicle with id $id not found"], $status = Response::HTTP_NOT_FOUND);
+        }
+
+        return $vehicleQuery->get()->toJson();
     }
 
     /**
@@ -113,21 +118,55 @@ class VehicleController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $vehicleQuery = Vehicle::where('id', $id);
+        if($vehicleQuery->doesntExist()){
+            return response()->json(["error" => "vehicle with id $id not found"], $status = Response::HTTP_NOT_FOUND);
+        }
+
+        $vehicleQuery->delete();
+
+        return response()->json($status = Response::HTTP_OK);
     }
 
+    /**
+     * Search all vehicles for a make containing search target
+     * 
+     * @param  string  $make
+     * @return \Illuminate\Http\Response
+     */
     public function searchMake($make){
         return Vehicle::where('make', 'LIKE', "%$make%")->paginate($this->NUM_PAGE_LIMIT)->toJson();
     }
 
+    
+    /**
+     * Search all vehicles for a model containing search target
+     * 
+     * @param  string  $model
+     * @return \Illuminate\Http\Response
+     */
     public function searchModel($model){
         return Vehicle::where('model', 'LIKE', "%$model%")->paginate($this->NUM_PAGE_LIMIT)->toJson();
     }
 
+    
+    /**
+     * Search all vehicles for a year containing search target
+     * 
+     * @param  string  $year
+     * @return \Illuminate\Http\Response
+     */
     public function searchYear($year){
         return Vehicle::where('year', 'LIKE', "%$year%")->paginate($this->NUM_PAGE_LIMIT)->toJson();
     }
 
+    
+    /**
+     * Search all vehicles for a color containing search target
+     * 
+     * @param  string  $color
+     * @return \Illuminate\Http\Response
+     */
     public function searchColor($color){
         return Vehicle::where('color', 'LIKE', "%$color%")->paginate($this->NUM_PAGE_LIMIT)->toJson();
     }
