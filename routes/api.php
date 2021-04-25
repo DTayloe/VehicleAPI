@@ -17,6 +17,12 @@ use App\Http\Controllers\VehicleController;
 |
 */
 
+Route::get('/vehicles', [VehicleController::class, 'index']);
+Route::post('/vehicles', [VehicleController::class, 'store']);
+Route::get('/vehicles/{id}', [VehicleController::class, 'show']);
+Route::put('/vehicles/{id}', [VehicleController::class, 'update']);
+Route::delete('/vehicles/{id}', [VehicleController::class, 'destroy']);
+Route::get('/vehicles/search/make/{make}', [VehicleController::class, 'searchMake']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
