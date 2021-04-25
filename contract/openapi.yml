@@ -1,0 +1,17 @@
+openapi: 3.1.0
+info:
+    title: VehicleAPI
+    version: 0.1.0
+    description: 'This is a coding challenge to create a vehicle sales inventory API.'
+    contact: { name: Daniel, email: diomoidtron@gmail.com, url: 'https://github.com/DTayloe/VehicleAPI' }
+servers:
+    - { url: 'http://VehicleAPI.test', description: 'Local url for testing' }
+tags: null
+paths: null
+components:
+    schemas: null
+    responses: null
+    headers: null
+    parameters: null
+    links: null
+    examples: null
