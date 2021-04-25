@@ -54,7 +54,6 @@ class VehicleController extends Controller
         $vehicle->options = $request->input('options');
         $vehicle->save();
 
-        // return response($status = Response::$statusTexts[Response::HTTP_CREATED]);
         return response()->json($status = Response::HTTP_CREATED);
     }
 
@@ -94,5 +93,17 @@ class VehicleController extends Controller
 
     public function searchMake($make){
         return Vehicle::where('make', 'LIKE', "%$make%")->paginate($this->NUM_PAGE_LIMIT)->toJson();
+    }
+
+    public function searchModel($model){
+        return Vehicle::where('model', 'LIKE', "%$model%")->paginate($this->NUM_PAGE_LIMIT)->toJson();
+    }
+
+    public function searchYear($year){
+        return Vehicle::where('year', 'LIKE', "%$year%")->paginate($this->NUM_PAGE_LIMIT)->toJson();
+    }
+
+    public function searchColor($color){
+        return Vehicle::where('color', 'LIKE', "%$color%")->paginate($this->NUM_PAGE_LIMIT)->toJson();
     }
 }

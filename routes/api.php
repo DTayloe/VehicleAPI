@@ -23,6 +23,9 @@ Route::get('/vehicles/{id}', [VehicleController::class, 'show']);
 Route::put('/vehicles/{id}', [VehicleController::class, 'update']);
 Route::delete('/vehicles/{id}', [VehicleController::class, 'destroy']);
 Route::get('/vehicles/search/make/{make}', [VehicleController::class, 'searchMake']);
+Route::get('/vehicles/search/model/{model}', [VehicleController::class, 'searchModel']);
+Route::get('/vehicles/search/year/{year}', [VehicleController::class, 'searchYear']);
+Route::get('/vehicles/search/color/{color}', [VehicleController::class, 'searchColor']);
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
