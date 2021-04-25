@@ -65,7 +65,7 @@ class VehicleController extends Controller
      */
     public function show($id)
     {
-        return Vehicle::findOrFail($id);
+        return Vehicle::findOrFail($id)->toJson();
     }
 
     /**
@@ -77,7 +77,32 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $validator = Validator::make($request->all(),[
+            'make'=>'nullable|max:50',
+            'model'=>'nullable|max:50',
+            'year'=>'nullable|numeric|between:0,32000',
+            'color'=>'nullable|max:50',
+            'price'=>'nullable|numeric|between:0,2000000000',
+            'mileage'=>'nullable|numeric|between:0,2000000000',
+            'options'=>'nullable|json',
+        ]);
+
+        if($validator->fails()){
+            return response()->json(["validation failed" => $validator->errors()], $status = Response::HTTP_BAD_REQUEST);
+        }
+
+        $vehicle = Vehicle::find($id);
+
+        $vehicle->make = is_null($request->input('make')) ? $vehicle->make : $request->input('make');
+        $vehicle->model = is_null($request->input('model')) ? $vehicle->model : $request->input('model');
+        $vehicle->year = is_null($request->input('year')) ? $vehicle->year : $request->input('year');
+        $vehicle->color = is_null($request->input('color')) ? $vehicle->color : $request->input('color');
+        $vehicle->price = is_null($request->input('price')) ? $vehicle->price : $request->input('price');
+        $vehicle->mileage = is_null($request->input('mileage')) ? $vehicle->mileage : $request->input('mileage');
+        $vehicle->options = is_null($request->input('options')) ? $vehicle->options : $request->input('options');
+        $vehicle->save();
+
+        return response()->json($status = Response::HTTP_OK);
     }
 
     /**
