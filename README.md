@@ -4,6 +4,10 @@
 
 This is a coding challenge to create a vehicle sales inventory API, complete with documentation based on the OpenAPI specification. 
 
+### OpenAPI specification
+
+https://app.swaggerhub.com/apis/DTayloe/vehicle-api/1.0
+
 ## Setup
 
 ### Prerequisites
