@@ -23,7 +23,7 @@ class VehicleController extends Controller
     }
 
     /**
-     * Store a newly created resource in storage.
+     * Store a newly created vehicle in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
@@ -58,7 +58,7 @@ class VehicleController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Display the specified vehicle.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
@@ -74,7 +74,7 @@ class VehicleController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Update the specified vehicle in storage.
      *
      * @param  \Illuminate\Http\Request  $request
      * @param  int  $id
@@ -82,6 +82,10 @@ class VehicleController extends Controller
      */
     public function update(Request $request, $id)
     {
+        if (Vehicle::where('id', $id)->doesntExist()){
+            return response()->json(["error" => "vehicle with id $id not found"], $status = Response::HTTP_NOT_FOUND);
+        }
+
         $validator = Validator::make($request->all(),[
             'make'=>'nullable|max:50',
             'model'=>'nullable|max:50',
@@ -111,7 +115,7 @@ class VehicleController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Remove the specified vehicle from storage.
      *
      * @param  int  $id
      * @return \Illuminate\Http\Response
