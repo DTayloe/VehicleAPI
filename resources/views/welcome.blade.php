@@ -17,5 +17,6 @@
 </head>
 <body>
     <a href="/api/vehicles">View all vehicles</a>
+    <a href="/api/seedDB">Seed database</a>
 </body>
 </html>

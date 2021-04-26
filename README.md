@@ -18,6 +18,7 @@ https://app.swaggerhub.com/apis/DTayloe/vehicle-api/1.0
 4. Run the following command in the bash terminal:
 `./vendor/bin/sail up`
 5. You should be able to view the page at `localhost`, which contains a single button to redirect to the list of vehicles.
+6. The database may be seeded using the "Seed Database" button on the `localhost` page, which will add 50 random Vehicles.
 
 ## Usage
 

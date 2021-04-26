@@ -174,4 +174,8 @@ class VehicleController extends Controller
     public function searchColor($color){
         return Vehicle::where('color', 'LIKE', "%$color%")->paginate($this->NUM_PAGE_LIMIT)->toJson();
     }
+
+    public function seedDB(){
+        return Vehicle::factory(50)->create();
+    }
 }

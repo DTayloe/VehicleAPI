@@ -26,6 +26,8 @@ Route::get('/vehicles/search/make/{make}', [VehicleController::class, 'searchMak
 Route::get('/vehicles/search/model/{model}', [VehicleController::class, 'searchModel']);
 Route::get('/vehicles/search/year/{year}', [VehicleController::class, 'searchYear']);
 Route::get('/vehicles/search/color/{color}', [VehicleController::class, 'searchColor']);
+Route::get('/seedDB', [VehicleController::class, 'seedDB']);
+
 
 Route::middleware('auth:api')->get('/user', function (Request $request) {
     return $request->user();
